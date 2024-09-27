@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <?php
+        error_reporting( E_ALL );
+        ini_set( "display_errors", 1 );    
+    ?>
 </head>
 <body>
     <?php
@@ -85,7 +89,17 @@
         $digitos_texto="digitos";
         if($digitos==1)$digitos_texto="digito";
 
-        echo "<p>El numero aleatorio $numero_aleatorio tiene $digitos $digitos_texto";
+        echo "<p>El numero aleatorio $numero_aleatorio tiene $digitos $digitos_texto</p>";
+
+        //VERSION CON MATCH
+        $resultado=match (true) {
+            $numero_aleatorio >0 && $numero_aleatorio <10 => 1,
+            $numero_aleatorio >=10 && $numero_aleatorio <100 => 2,
+            $numero_aleatorio >=100 && $numero_aleatorio <=200 => 3,
+            DEFAULT => "ERROR"
+        };  
+
+        echo "<h2>El numero aleatorio $numero_aleatorio tiene $resultado $digitos_texto</h2>";
 
         //$numero_aleatorio_decimales=rand(10,100)/10;
 
@@ -102,6 +116,14 @@
                 echo "El numero es 3";
                 break;
         }
+
+        $resultado=match($n){
+            1=> "El numero es 1",
+            2=> "El numero es 2",
+            3=> "El numero es 3"
+        };
+
+        echo "<h2>$resultado</h2>";
 
     ?>
 </body>

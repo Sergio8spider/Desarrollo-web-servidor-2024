@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <?php
+        error_reporting( E_ALL );
+        ini_set( "display_errors", 1 );    
+    ?>
 </head>
 <body>
     <?php
@@ -69,10 +73,10 @@
         echo "<h2>Hoy es dia $dia</h2>";
 
         /*
-        TENEMOS CLASE LUJES, MIERCOLES Y VIERNES
+        TENEMOS CLASE LUNES, MIERCOLES Y VIERNES
         NO TENEMOS CLASE EL RESTO
 
-        HACER UN SWITCH QUE DIGA SI HOY TENEMOD CLASE
+        HACER UN SWITCH QUE DIGA SI HOY TENEMOS CLASE
         */
         switch($dia){
             case "Lunes":
@@ -84,6 +88,28 @@
                 echo "Hoy no tenemos clase";
         }
 
+        /*
+        CON UNA ESTRUCURA SWITCH CAMBIAR LA VARIABLE DIA A ESPAÑOL
+
+        REESCRIBIR EL SWITCH DE LOS DIAS DE CLASE CON LOA VARIABLE EN ESPAÑOL
+        */
+        $dia_espanol=null;
+
+        $dia_espanol=match ($dia) {
+            "Monday" => "Lunes",
+            "Tuesday" =>"Martes",
+            "Wednesday" => "Miercoles",
+            "Thursday" => "Jueves",
+            "Friday" => "Viernes",
+            "Saturday" => "Sabado",
+            "Sunday"=>"Domingo"
+        };
+
+        /*if($dia =="Monday"){
+            $dia_espanol="Lunes";
+        }*/
+
+        echo "<h2>$dia_espanol</h2>";
     ?>
 </body>
 </html>
