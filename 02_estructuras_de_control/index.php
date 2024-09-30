@@ -52,6 +52,14 @@
                     Bucles
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <a href="ejemplos.php">ejemplos.php</a>
+                </td>
+                <td>
+                    Ejemplos
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>
