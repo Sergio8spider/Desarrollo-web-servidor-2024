@@ -20,7 +20,7 @@
         mostrarlo en una tabla
     --> 
     <?php
-        $array=array(
+        $asignaturas=array(
             "Desarrollo web en entorno servidor" => "Alejandra",
             "Desarrollo webn en entorno cliente" => "Jose Miguel",
             "Diseño den interfaces web" => "Jose Miguel",
@@ -40,7 +40,8 @@
             </thead>
             <tbody>
                     <?php
-                        foreach($array as $asignatura => $profesor){
+                    krsort($asignaturas);
+                        foreach($asignaturas as $asignatura => $profesor){
                             echo "<tr>";
                             echo "<td>$asignatura</td>";
                             echo "<td>$profesor</td>";
@@ -84,26 +85,27 @@
             </thead>
             <tbody>
                     <?php
-                        foreach($array as $alumno => $nota){
-                            echo "<tr>";
-                            echo "<td>$alumno</td>";
-                            echo "<td>$nota</td>";
-                            if($nota >= 5 && $nota<=6){
-                                echo "<td class='aprobado'>Aprobado</td>";
-                            }elseif($nota >= 5 && $nota <= 8){
-                                echo "<td class='notable'>Notable</td>";
-                            }
-                            elseif($nota >= 9 && $nota <= 10){
-                                echo "<td class='sobresaliente'>Sobresaliente</td>";
-                            }else{
-                                echo "<td class='suspenso'>Suspenso</td>";
-                            }
-                            
-                            echo "</tr>";
-                        }
-                    ?>
+                        foreach($array as $alumno => $nota){?>
+                            <tr>
+                                <td>$alumno</td>
+                                <td>$nota</td>
+                                    <?php if($nota >= 5 && $nota<=6){?>
+                                        <td class='aprobado'>Aprobado</td>
+                                    <?php }elseif($nota >= 5 && $nota <= 8){?>
+                                        <td class='notable'>Notable</td>
+                                    <?php } elseif($nota >= 9 && $nota <= 10){?>
+                                        <td class='sobresaliente'>Sobresaliente</td>
+                                    <?php }else{?>
+                                        <td class='suspenso'>Suspenso</td>
+                                    <?php } ?>
+                            </tr>
+                    <?php } ?>
             </tbody>
     </table>
+    /**Insertar dos nuevos estudiantes, con notas aletarorias entre 0 y 10
+    Borrar un estudiante (el que peor os caiga) por la clave
+    Mostrar en una nueva tabla todo ordenado por los nombres en orden alfabeticamente inversa
+    Mostrar en una nueva tabla todo ordenador por la nota de 10 a 0 (prdem inverso)  */
 
 </body>
 </html>
