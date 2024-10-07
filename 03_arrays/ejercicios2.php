@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="estilos.css" rel="stylesheet" type="text/css">
+    <?php
+        error_reporting( E_ALL );
+        ini_set( "display_errors", 1 );    
+    ?>
+    <link href="estilos.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <!--
@@ -66,7 +71,7 @@
         -COLUMNA 3: SI NOTA < 5, SUSPENSO, ELSE, APROBADO
     --> 
         <?php
-            $array=array(
+            $estudiantes=array(
                 "Francisco" => 3,
                 "Daniel" => 5,
                 "Aurora"=> 7,
@@ -85,10 +90,10 @@
             </thead>
             <tbody>
                     <?php
-                        foreach($array as $alumno => $nota){?>
+                        foreach($estudiantes as $alumno => $nota){?>
                             <tr>
-                                <td>$alumno</td>
-                                <td>$nota</td>
+                                <td><?php $alumno ?></td>
+                                <td><?php $nota ?></td>
                                     <?php if($nota >= 5 && $nota<=6){?>
                                         <td class='aprobado'>Aprobado</td>
                                     <?php }elseif($nota >= 5 && $nota <= 8){?>
@@ -102,10 +107,48 @@
                     <?php } ?>
             </tbody>
     </table>
-    /**Insertar dos nuevos estudiantes, con notas aletarorias entre 0 y 10
+    /*Insertar dos nuevos estudiantes, con notas aletarorias entre 0 y 10
     Borrar un estudiante (el que peor os caiga) por la clave
     Mostrar en una nueva tabla todo ordenado por los nombres en orden alfabeticamente inversa
-    Mostrar en una nueva tabla todo ordenador por la nota de 10 a 0 (prdem inverso)  */
+    Mostrar en una nueva tabla todo ordenador por la nota de 10 a 0 (prdem inverso)  
+    */
+    <?php
+    $estudiantes["Paula"]=rand(0,10);
+    $estudiantes["Waluigi"]=rand(0,10);
+
+    unset($estudiantes["Luis"]);
+
+    krsort($estudiantes)
+    ?>
+    <table>
+        <caption>EJERCICIO 2.1</caption>
+            <thead>
+                <tr>
+                    <th>Alumno</th>
+                    <th>Nota</th>
+                    <th>Calificacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <?php
+                        foreach($estudiantes as $alumno => $nota){?>
+                            <tr>
+                                <td><?php $alumno ?></td>
+                                <td><?php $nota ?></td>
+                                    <?php if($nota >= 5 && $nota<=6){?>
+                                        <td class='aprobado'>Aprobado</td>
+                                    <?php }elseif($nota >= 5 && $nota <= 8){?>
+                                        <td class='notable'>Notable</td>
+                                    <?php } elseif($nota >= 9 && $nota <= 10){?>
+                                        <td class='sobresaliente'>Sobresaliente</td>
+                                    <?php }else{?>
+                                        <td class='suspenso'>Suspenso</td>
+                                    <?php } ?>
+                            </tr>
+                    <?php } ?>
+            </tbody>
+    </table>
+
 
 </body>
 </html>
