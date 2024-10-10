@@ -34,11 +34,47 @@
          * -TITULO (TODO ALFABETICAMENTE, Y EL AÑO DE MAS RECIENTE A MAS ANTIGUO)
          */
         for($i=0; $i<count($peliculas); $i++){
-            $peliculas[$i][3]="X";
+            $peliculas[$i][3]=rand(30,240);
+            if($peliculas[$i][3]<60){
+                $peliculas[$i][4]="Cortometraje";
+            }else{
+                $peliculas[$i][4]="Largometraje";
+            };
         };
     ?>
     
 
+    <table>
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Genero</th>
+                <th>Fecha de lanzamiento</th>
+            </tr>
+        </thead>
+        <tbody>
+                <?php
+                    foreach($peliculas as $pelicula){
+                        list ($titulo,$categoria,$fecha)=$pelicula;
+                        echo "<tr>";
+                        echo "<td>$titulo</td>";
+                        echo "<td>$categoria</td>";
+                        echo "<td>$fecha</td>";
+                        echo "</tr>";
+                    }
+                ?>
+        </tbody>
+    </table>
+    <?php
+    $_categoria=array_column($peliculas,1);
+    $_fecha=array_column($peliculas,2);
+    $_titulo=array_column($peliculas,0);
+
+    array_multisort($_categoria,SORT_ASC,
+                    $_fecha,SORT_DESC,
+                    $_titulo,SORT_ASC,
+                    $peliculas);
+    ?>
     <table>
         <thead>
             <tr>
@@ -52,11 +88,13 @@
         <tbody>
                 <?php
                     foreach($peliculas as $pelicula){
-                        list ($titulo,$categoria,$fecha)=$pelicula;
+                        list ($titulo,$categoria,$fecha,$duracion,$tipo)=$pelicula;
                         echo "<tr>";
                         echo "<td>$titulo</td>";
                         echo "<td>$categoria</td>";
                         echo "<td>$fecha</td>";
+                        echo "<td>$duracion</td>";
+                        echo "<td>$tipo</td>";
                         echo "</tr>";
                     }
                 ?>
