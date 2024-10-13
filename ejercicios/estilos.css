@@ -1,0 +1,9 @@
+table{
+    border: 2px solid purple;
+}
+th,td{
+    border: 2px solid blue;
+}
+caption{
+    border:2px solid pink;
+}
