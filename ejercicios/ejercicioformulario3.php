@@ -18,10 +18,10 @@
     -->
 
     <form action="" method="post">
-        <label for="numero1">Numero 1</label>
+        <label for="numero1">Desde</label>
         <input type="text" name="mensaje" id="numero1">
         <br><br>
-        <label for="numero2">Numero 2</label>
+        <label for="numero2">Hasta</label>
         <input type="text" name="mensaje2" id="numero2">
         <br><br>
         <input type="submit" value="Enviar">
@@ -37,11 +37,8 @@
         echo "<h2>Los numeros primos entre $num1 y $num2 son:<br>";
 
         for ($num1; $num1 <= $num2; $num1++) {
-            for ($j = 2; $j <= $num1; $j++) {
-                if ($num1 % $j == 0) {
-                    break;
-                }
-
+            for ($j = 2; $j < $num1; $j++) {
+                if ($num1 % $j == 0) {break;}
             }
             if ($num1 == $j) {
                 echo "$num1<br>";

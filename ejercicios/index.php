@@ -54,6 +54,14 @@
                     Ejercicio 4 formulario
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <a href="ejerciciodinero.php">ejerciciodinero.php</a>
+                </td>
+                <td>
+                    Ejercicio calcular salario neto
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>

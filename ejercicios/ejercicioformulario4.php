@@ -75,7 +75,7 @@
             case "kelvin":
                 switch ($aconvertir) {
                     case "celsius":
-                        $num -= 273.15;
+                        $num -= 273.15; 
                         echo "$num";
                         break;
                     case "kelvin":

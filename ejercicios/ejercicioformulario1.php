@@ -35,20 +35,17 @@
         $numero1 = $_POST["mensaje"];
         $numero2 = $_POST["mensaje2"];
         $numero3 = $_POST["mensaje3"];
-        $resultado;
+        $max=$numero1;
 
         echo "<p>Formulario enviado</p>";
 
-        if ($numero1 > $numero2 && $numero1 > $numero3) {
-            $resultado = "El mayor es $numero1";
-        } elseif ($numero2 > $numero1 && $numero2 > $numero3) {
-            $resultado = "El mayor es $numero2";
-        } elseif ($numero3 > $numero1 && $numero3 > $numero2) {
-            $resultado = "El mayor es $numero3";
-        } else {
-            $resultado = "Hay varios numeros iguales";
+        if ($numero2 > $max) {
+            $max = $numero2;
+        } 
+        if($numero3 > $max){
+            $max = $numero3;
         }
-        echo "<h2>$resultado</h2>";
+        echo "<h2>El mayor es $max</h2>";
     }
     ?>
 </body>
