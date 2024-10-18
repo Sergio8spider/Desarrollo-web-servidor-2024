@@ -21,6 +21,8 @@
             ["Stardew valley","Gestion de recursos",7.99]
         ];
 
+        print_r($videojuegos);
+
         $nuevo_videojuego=["Octopath Traveler","RPG",29.95];    
         array_push($videojuegos,$nuevo_videojuego);
         

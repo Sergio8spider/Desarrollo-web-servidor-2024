@@ -22,7 +22,7 @@
         <tbody>
             <tr>
                 <td>
-                    <a href="arrays.php">ejemplos.php</a>
+                    <a href="arrays.php">arrays.php</a>
                 </td>
                 <td>
                     Arrays

@@ -52,6 +52,22 @@
                     Ejercicio multi form
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <a href="iva.php">iva.php</a>
+                </td>
+                <td>
+                    Ejercicio IVA con GET
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="iva_post.php">iva_post.php</a>
+                </td>
+                <td>
+                    Ejercicio IVA con POST
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>
