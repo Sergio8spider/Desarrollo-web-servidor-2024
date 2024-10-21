@@ -6,11 +6,7 @@
     <title>Document</title>
     <?php
         error_reporting( E_ALL );
-        ini_set("display_errors", 1 );    
-
-        define("GENERAL", 1.21);
-        define("REDUCIDO", 1.1);
-        define("SUPERREDUCIDO", 1.04);
+        ini_set( "display_errors", 1 );    
     ?>
 </head>
 <body>

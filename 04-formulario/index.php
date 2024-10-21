@@ -68,6 +68,14 @@
                     Ejercicio IVA con POST
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <a href="varios_formularios.php">varios_formularios.php</a>
+                </td>
+                <td>
+                varios_formularios
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>
