@@ -39,7 +39,7 @@ function convertirTemperatura($temp,$unidad_inicial,$unidad_final){
             }   
         break;
     }
-    echo "$temp_noconvert $unidad_inicial son $temp $unidad_final";
+    return $temp;
     
 }
 

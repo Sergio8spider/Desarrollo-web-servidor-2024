@@ -65,7 +65,32 @@
                 $temperatura=$_POST["temperatura"];
                 $inicial=$_POST["inicial"];
                 $final=$_POST["final"];
-                convertirTemperatura($temperatura,$inicial,$final);
+
+                if($temperatura !=""){
+                    if(is_numeric($temperatura)){
+                        if($inicial=="C" && $temperatura>=-273.15){
+                            echo convertirTemperatura($inicial,$temperatura,$final);
+                        }elseif($inicial=="C" && $temperatura<=-273.15){
+                            echo "<p>La temperatura no puede ser inferior a -273.15 C</p>";
+                        }
+                        if($inicial=="K" && $temperatura>0){
+                            echo convertirTemperatura($inicial,$temperatura,$final);
+                        }elseif($inicial=="K" && $temperatura<0){
+                            echo "<p>La temperatura no puede ser inferior a 0 K</p>";
+                        }
+                        if($inicial=="F" && $temperatura>-459.67){
+                            echo convertirTemperatura($inicial,$temperatura,$final);
+                        }elseif($inicial=="F" && $temperatura<-459.67){
+                            echo "<p>La temperatura no puede ser inferior a -459.67 F</p>";
+                        }
+                    }else{
+                        echo "<p>La temperatura debe ser un numero</p>";
+                    }
+                    
+                }else{
+                    echo "<p>Falta la temperatura</p>";
+                }
+                
             }
             //  Formularios edades
             if($_POST["accion"]=="formulario_edades"){

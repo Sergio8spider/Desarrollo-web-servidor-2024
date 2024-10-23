@@ -1,9 +1,9 @@
 <?php
 function calcularPotencia($base,$exponente){
-        $resultado=0;
+        $resultado=1;
         for($i=0; $i<$exponente; $i++){            
-            $resultado+=$base*$exponente;           
+            $resultado*=$base;           
         }
-        echo "<h1>$resultado</h1>";
+        return $resultado;
 }
 ?>

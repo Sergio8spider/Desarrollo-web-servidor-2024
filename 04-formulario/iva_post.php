@@ -6,7 +6,9 @@
     <title>Document</title>
     <?php
         error_reporting( E_ALL );
-        ini_set( "display_errors", 1 );    
+        ini_set( "display_errors",1);    
+
+        require("../05-funciones/economia.php");
     ?>
 </head>
 <body>
@@ -33,16 +35,37 @@
 
     <?php
     if($_SERVER["REQUEST_METHOD"]=="POST"){
-        $precio = $_POST["precio"];
-        $iva = $_POST["iva"];
+        $tmp_precio = $_POST["precio"];
+        $tmp_iva = $_POST["iva"];
 
-        $pvp = match($iva) {
-            "general" => $precio * GENERAL,
-            "reducido" => $precio * REDUCIDO,
-            "superreducido" => $precio * SUPERREDUCIDO
-        };
+        if($tmp_precio!=""){
+            if(filter_var($tmp_precio,FILTER_VALIDATE_INT) !== FALSE){
+                if($tmp_precio>0){
+                    $precio=$tmp_precio;
+                }else{
+                    echo "<p>El precio debe ser mayor que 0</p>";
+                }
+            }else{
+                echo "<p>El precio debe ser un numero</p>";
+            }
+        }else{
+            echo "<p>El precio es obligatorio</p>";
+        }
+        if($tmp_iva!=""){
+            $iva_posibles=["general","reducido","superreducido"];
+            if(in_array($tmp_iva,$iva_posibles)){
+                $iva=$tmp_iva;
+            }else{
+                echo "<p>El iva solo puede ser general, reducido o superreducido</p>";
+            }
+        }else{
+            echo "<p>EL iva es obligatorio</p>";
+        }
 
-        echo "<p>El PVP ES $pvp</p>"; 
+        if(isset($iva) && isset($precio)){
+            $resultado= calcularPVP($precio,$iva);
+            echo "<p>$resultado</p>";
+        }
     }
     ?>
 </body>
