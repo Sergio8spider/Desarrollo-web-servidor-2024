@@ -76,6 +76,14 @@
                 varios_formularios
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <a href="usuario.php">usuario.php</a>
+                </td>
+                <td>
+                Usuario
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>
