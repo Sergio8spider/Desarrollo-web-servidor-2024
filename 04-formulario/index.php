@@ -84,6 +84,22 @@
                 Usuario
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <a href="videojuegos.php">videojuegos.php</a>
+                </td>
+                <td>
+                Videojuegos
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="futbol.php">futbol.php</a>
+                </td>
+                <td>
+                Futbol
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>

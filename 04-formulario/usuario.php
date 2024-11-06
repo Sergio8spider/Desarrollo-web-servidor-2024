@@ -16,6 +16,14 @@
     </style>
 </head>
 <body>
+    <?php
+        function depurar($entrada){
+            $salida=htmlspecialchars($entrada);
+            $salida=trim($salida);
+            $salida=preg_replace('!/s+!',' ',$salida);
+            return $salida;
+        }
+    ?>
     <div class="container">
         <!-- Content here -->
 
@@ -129,7 +137,7 @@
                         $err_nombre = "El nombre solo puede contener letras y espacios
                             en blanco";
                     } else {
-                        $nombre = $tmp_nombre;
+                        $nombre = ucwords(strtolower($tmp_nombre));
                     }
                 }
             }
@@ -145,7 +153,7 @@
                     list($anno_actual,$mes_actual,$dia_actual) = explode('-',$fecha_actual);
                     list($anno,$mes,$dia) = explode('-',$tmp_fecha_nacimiento);
 
-                    echo "<h2>Año: $anno, Año actual: $anno_actual</h2>";
+                    //echo "<h2>Año: $anno, Año actual: $anno_actual</h2>";
                     if($anno_actual - $anno < 18) {
                         $err_fecha_nacimiento = "No puedes ser menor de edad";
                     } elseif($anno_actual - $anno == 18) {
@@ -174,6 +182,8 @@
                         } elseif($mes_actual - $mes < 0) {
                             $fecha_nacimiento = $tmp_fecha_nacimiento;
                         } 
+                    } else {
+                        $fecha_nacimiento = $tmp_fecha_nacimiento;
                     }
                 }
             }

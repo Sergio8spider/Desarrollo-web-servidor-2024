@@ -1,5 +1,5 @@
 <?php
-function convertirTemperatura($temp,$unidad_inicial,$unidad_final){
+function convertirTemperatura(int|float $temp,string $unidad_inicial,string $unidad_final): int|float{
     $temp_noconvert=$temp;
     switch ($unidad_inicial) {
         case "C":
