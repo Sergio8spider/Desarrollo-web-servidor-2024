@@ -24,6 +24,9 @@
         $media2+=$array2[$i];
     };
 
+    $media1=$media1/count($array1);
+    $media2=$media2/count($array2);
+
     array_push($array3,$array1);
     array_push($array3,$array2);
 
@@ -46,7 +49,6 @@
             $min = $array1[$i];
         }
     };
-    $media1=$media1/count($array1);
 
     echo "<h1>Del array 1:</h1><h2>El maximo es $max</h2><h2>El minimo es $min</h2><h2>La media es es $media1</h2>";
 
@@ -61,7 +63,6 @@
             $min = $array2[$i];
         }
     };
-    $media2=$media2/count($array2);
 
     echo "<h1>Del array 2:</h1><h2>El maximo es $max</h2><h2>El minimo es $min</h2><h2>La media es es $media2</h2>";
     ?>

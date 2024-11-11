@@ -25,7 +25,7 @@
         }
     ?>
     <div class="container">
-        <!-- Content here -->
+        
 
         <?php
         if($_SERVER["REQUEST_METHOD"] == "POST") {
