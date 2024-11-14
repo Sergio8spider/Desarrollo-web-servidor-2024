@@ -100,6 +100,22 @@
                 Futbol
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <a href="validacion_animes.php">validacion_animes.php</a>
+                </td>
+                <td>
+                Validacion animes
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="nuevo_estudio.php">nuevo_estudio.php</a>
+                </td>
+                <td>
+                nuevo_estudio
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>
