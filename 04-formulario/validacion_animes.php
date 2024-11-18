@@ -20,6 +20,7 @@
     function depurar(string $elemento): string{
         $salida=htmlspecialchars($elemento);
         $salida=trim($elemento);
+        $salida=stripslashes($elemento);
         $salida= preg_replace('!\s+!',' ',$elemento);
         return $salida;
     }
