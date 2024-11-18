@@ -14,6 +14,7 @@
             color: red;
         }
     </style>
+    <?php require 'conexion.php'; ?>
 </head>
 <body>
     <?php
@@ -26,7 +27,7 @@
     }
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
         $tmp_titulo=depurar($_POST["titulo"]);
-        $tmp_estudio=depurar($_POST["nombre_estudio"]);
+        $tmp_estudio=($_POST["nombre_estudio"]);
         $tmp_anno_estreno=depurar($_POST["anno_estreno"]);
         $tmp_num_temporadas=depurar($_POST["num_temporadas"]);
 
@@ -63,6 +64,12 @@
                 $num_temporadas=$tmp_num_temporadas;
             }
         }
+
+        $sql = "INSERT INTO animes (titulo, nombre_estudio, anno_estreno, num_temporadas) 
+                VALUES ('$titulo', '$estudio', $anno_estreno, $num_temporadas)";
+
+        $_conexion -> query($sql);
+
     }
     ?>
     <div class="container">
@@ -77,9 +84,9 @@
                 <label class="form-label">Nombre estudio</label>
                 <select name="nombre_estudio">
                     <?php 
-                        $estudios = ["Ghibli","Kakaroto","Dandan","FundacionTorrente","Sergio"];
+                        $estudios = ["Kyoto Animation","Madhouse","Wit Studio","Toei Animation","TOHO Animation","CloverWorks","OLM","A-1 Pictures","Trigger"];
                         foreach($estudios as $estudio){
-                            echo "<option value=".strtolower($estudio).">".$estudio."</option>";
+                            echo "<option value=".($estudio).">".$estudio."</option>";
                         }
                     ?>
                 </select>
