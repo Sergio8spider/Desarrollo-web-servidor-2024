@@ -18,14 +18,33 @@
             $usuario = $_POST["usuario"];
             $contraseña = $_POST["contraseña"];
 
-            $contraseña_cifrada = password_hash($contraseña,PASSWORD_DEFAULT);
+            $sql="SELECT * FROM usuarios WHERE usuario ='$usuario'";
+            $resultado=$_conexion -> query($sql);
 
-            $sql = "INSERT INTO usuarios VALUES ('$usuario','$contraseña_cifrada')";
-            $_conexion -> query($sql);
+            if($resultado -> num_rows == 0){
+                echo "<h2>El usuario $usuario no existe</h2>";
+            }else{
+                $datos_usuario = $resultado -> fetch_assoc();
+                /**
+                 * Podemos acceder a:
+                 * 
+                 * $datos_usuario["usuario]
+                 * $datos_usuario["contraseña"]
+                 */
+                $acceso_concedido = password_verify($contraseña,$datos_usuario["contraseña"]);
+
+                if($acceso_concedido){
+                    session_start();
+                    $_SESSION["usuario"] = $usuario;
+                    header("location: ../index.php");
+                }else{
+                    echo "<h1>La contraseña no es correcta</h1>";
+                }
+            }
         } 
     ?>
     <div class="container">
-        <h1>Registro</h1>
+        <h1>Iniciar sesion</h1>
         
         <form class="col-6" action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
@@ -37,11 +56,11 @@
                 <input class="form-control" type="password" name="contraseña">
             </div>
             <div class="mb-3">
-                <input class="btn btn-primary" type="submit" value="Registrarse">
+                <input class="btn btn-primary" type="submit" value="Iniciar sesion">
             </div>
             <div class="mb-3">
-                <h3>Si ya tienes cuenta,</h3>
-                <a class="btn btn-secondary" href="iniciar_sesion.php">Iniciar sesion
+                <h3>Si no tienes cuenta,</h3>
+                <a class="btn btn-secondary" href="registro.php">Registrarse
                 </a>
             </div>
         </form>

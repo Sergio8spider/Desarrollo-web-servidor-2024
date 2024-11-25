@@ -10,6 +10,14 @@
         ini_set("display_errors", 1 );    
 
         require('conexion.php');
+
+        session_start();
+        if(isset($_SESSION["usuario"])){
+            echo "<h1>Bienvenid@ $_SESSION[usuario]</h1>";
+        }else{
+            header("location: usuario/iniciar_sesion.php");
+            exit;
+        }
     ?>
 </head>
 <body>
@@ -33,7 +41,8 @@
              * a los arrays
              */
         ?>
-        <a class="btn btn-secondary" href="validacion_animes.php">Crear nuevo anime</a><br><br>
+        <a class="btn btn-warning" href="usuario/cerrar_sesion.php">Cerrar sesion</a><br><br>
+        <a class="btn btn-secondary" href="nuevo_anime.php">Crear nuevo anime</a><br><br>
         <table class="table table-striped table-hover">
             <thead class="table-dark">
                 <tr>
@@ -56,7 +65,7 @@
                         echo "<td>" . $fila["num_temporadas"] . "</td>"; 
                         ?>
                         <td>
-                            <img width="150" height="200" src="<?php echo $fila["imagen"] ?>">
+                            <img width="200" height="200" src="<?php echo $fila["imagen"] ?>">
                         </td>
                         <td>
                             <a class="btn btn-primary" 
