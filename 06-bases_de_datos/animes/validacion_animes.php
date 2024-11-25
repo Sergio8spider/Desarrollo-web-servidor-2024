@@ -30,6 +30,14 @@
         $tmp_estudio=($_POST["nombre_estudio"]);
         $tmp_anno_estreno=depurar($_POST["anno_estreno"]);
         $tmp_num_temporadas=depurar($_POST["num_temporadas"]);
+        /**
+         * $_FILES -> que es un array BIDIMENSIONAL
+         */
+        $nombre_imagen=$_FILES["imagen"]["name"];
+        $ubicacion_temporal=$_FILES["imagen"]["tmp_name"];
+        $ubicacion_final="./imagenes/$nombre_imagen";
+
+        move_uploaded_file($ubicacion_temporal,$ubicacion_final);
 
         if($tmp_titulo==""){
             $err_titulo="El titulo es obligatorio";
@@ -65,16 +73,25 @@
             }
         }
 
-        $sql = "INSERT INTO animes (titulo, nombre_estudio, anno_estreno, num_temporadas) 
-                VALUES ('$titulo', '$estudio', $anno_estreno, $num_temporadas)";
+        $sql = "INSERT INTO animes (titulo, nombre_estudio, anno_estreno, num_temporadas, imagen) 
+                VALUES ('$titulo', '$estudio', $anno_estreno, $num_temporadas,'$ubicacion_final')";
 
         $_conexion -> query($sql);
 
     }
+
+    $sql="SELECT * FROM estudios ORDER BY nombre_estudio";
+    $resultado=$_conexion-> query($sql);
+    $estudios=[];
+
+    while($fila=$resultado -> fetch_assoc()){
+        array_push($estudios,$fila["nombre_estudio"]);
+    }
+
     ?>
     <div class="container">
-        <h1>Formulario de animes</h1>
-        <form action="" method="post">
+        <h1>Añadir anime</h1>
+        <form class="col-6" action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label">Titulo</label>
                 <input class="form-control" type="text" name="titulo">
@@ -82,13 +99,13 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Nombre estudio</label>
-                <select name="nombre_estudio">
+                <select class="form-select" name="nombre_estudio">
                     <?php 
-                        $estudios = ["Kyoto Animation","Madhouse","Wit Studio","Toei Animation","TOHO Animation","CloverWorks","OLM","A-1 Pictures","Trigger"];
-                        foreach($estudios as $estudio){
-                            echo "<option value=".($estudio).">".$estudio."</option>";
-                        }
-                    ?>
+                        foreach($estudios as $estudio) { ?>
+                            <option value="<?php echo $estudio ?>">
+                                <?php echo $estudio ?>
+                    <?php } ?>
+                    
                 </select>
                 <?php if(isset($err_estudio)) echo "<h1 class='error'>$err_estudio</h1>" ?>
             </div>
@@ -101,6 +118,11 @@
                 <label class="form-label">Numero de temporadas</label>
                 <input class="form-control" type="text" name="num_temporadas">
                 <?php if(isset($err_num_temporadas)) echo "<h1 class='error'>$err_num_temporadas</h1>" ?>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Imagen</label>
+                <input class="form-control" type="file" name="imagen">
+                <?php if(isset($err_imagen)) echo "<h1 class='error'>$err_imagen</h1>" ?>
             </div>
             <div class="mb-3">
                 <input type="submit" class="btn btn-primary" value="Enviar">
