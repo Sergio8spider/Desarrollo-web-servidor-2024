@@ -20,8 +20,17 @@
 
             $contraseña_cifrada = password_hash($contraseña,PASSWORD_DEFAULT);
 
-            $sql = "INSERT INTO usuarios VALUES ('$usuario','$contraseña_cifrada')";
+            /* $sql = "INSERT INTO usuarios VALUES ('$usuario','$contraseña_cifrada')";
             $_conexion -> query($sql);
+ */
+            //Prepare
+            $sql = $_conexion -> prepare("INSERT INTO usuarios VALUES (?,?)");
+            
+            //Bind
+            $sql -> bind_param("ss",$usuario,$contraseña_cifrada);
+    
+            //Execute
+            $sql -> execute();
         } 
     ?>
     <div class="container">
