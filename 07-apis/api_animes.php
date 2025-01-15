@@ -30,7 +30,7 @@
     }
 
     function manejarGet($_conexion) {
-        $sql = "SELECT * FROM estudios";
+        $sql = "SELECT * FROM animes";
         $stmt = $_conexion -> prepare($sql);
         $stmt -> execute();
         $resultado = $stmt -> fetchAll(PDO::FETCH_ASSOC); # Equivalente al getResult de mysqli
@@ -38,14 +38,15 @@
     }
 
     function manejarPost($_conexion, $entrada) {
-        $sql = "INSERT INTO estudios (nombre_estudio, ciudad, anno_fundacion)
-            VALUES (:nombre_estudio, :ciudad, :anno_fundacion)";
+        $sql = "INSERT INTO animes (titulo,nombre_estudio, anno_estreno, num_temporadas)
+            VALUES (:titulo, :nombre_estudio, :anno_estreno, :num_temporadas)";
 
         $stmt = $_conexion -> prepare($sql);
         $stmt -> execute([
+            "titulo" => $entrada["titulo"],
             "nombre_estudio" => $entrada["nombre_estudio"],
-            "ciudad" => $entrada["ciudad"],
-            "anno_fundacion" => $entrada["anno_fundacion"]
+            "anno_estreno" => $entrada["anno_estreno"],
+            "num_temporadas" => $entrada["num_temporadas"]
         ]);
         if($stmt) {
             echo json_encode(["mensaje" => "el estudio se ha insertado correctamente"]);
