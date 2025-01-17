@@ -16,13 +16,13 @@
             manejarGet($_conexion);
             break;
         case "POST":
-            manejarGet($_conexion, $entrada);
+            manejarPost($_conexion, $entrada);
             break;
         case "PUT":
             echo json_encode(["mensaje" => "put"]);
             break;
         case "DELETE":
-            echo json_encode(["mensaje" => "delete"]);
+            manejarDelete($_conexion,$entrada);
             break;
         default:
             echo json_encode(["mensaje" => "otro"]);
@@ -53,4 +53,18 @@
             echo json_encode(["mensaje" => "error al insertar el estudio"]);
         }
     }
+
+    function manejarDelete($_conexion,$entrada){
+        $sql = "DELETE FROM estudios WHERE nombre_estudio = :nombre_estudio";
+        $stmt = $_conexion -> prepare($sql);
+        $stmt -> execute([
+            "nombre_estudio" => $entrada["nombre_estudio"]
+        ]);
+        if($stmt) {
+            echo json_encode(["mensaje" => "el estudio se ha borrado correctamente"]);
+        }else {
+            echo json_encode(["mensaje" => "error al borrar el estudio"]);
+        }
+    }
+
 ?>
