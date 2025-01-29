@@ -19,7 +19,7 @@
             manejarPost($_conexion, $entrada);
             break;
         case "PUT":
-            echo json_encode(["mensaje" => "put"]);
+            manejarPut($_conexion, $entrada);
             break;
         case "DELETE":
             manejarDelete($_conexion,$entrada);
@@ -30,11 +30,25 @@
     }
 
     function manejarGet($_conexion) {
-        $sql = "SELECT * FROM estudios";
+        /*$sql = "SELECT * FROM estudios";
         $stmt = $_conexion -> prepare($sql);
         $stmt -> execute();
         $resultado = $stmt -> fetchAll(PDO::FETCH_ASSOC); # Equivalente al getResult de mysqli
-        echo json_encode($resultado);
+        echo json_encode($resultado);*/
+
+        if(isset($_GET["ciudad"])){
+            $sql = "SELECT * FROM estudios WHERE ciudad = :ciudad";
+            $stmt = $_conexion -> prepare($sql);
+            $stmt -> execute([
+                "ciudad" => $_GET["ciudad"]
+            ]);
+        }else{
+            $sql ="SELECT * FROM estudios";
+            $stmt = $_conexion -> prepare($sql);
+            $stmt -> execute();
+        }
+        $resultado = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($resultado);   
     }
 
     function manejarPost($_conexion, $entrada) {
@@ -64,6 +78,21 @@
             echo json_encode(["mensaje" => "el estudio se ha borrado correctamente"]);
         }else {
             echo json_encode(["mensaje" => "error al borrar el estudio"]);
+        }
+    }
+
+    function manejarPut($_conexion,$entrada){
+        $sql = "UPDATE FROM estudios SET ciudad = :ciudad, anno_fundacion = :anno_fundacion WHERE nombre_estudio = :nombre_estudio";
+        $stmt = $_conexion -> prepare($sql);
+        $stmt -> execute([
+            "ciudad" => $entrada["ciudad"],
+            "anno_fundacion" => $entrada["anno_fundacion"],
+            "nombre_estudio" => $entrada["nombre_estudio"]
+        ]);
+        if($stmt) {
+            echo json_encode(["mensaje" => "el estudio se ha modificado correctamente"]);
+        }else {
+            echo json_encode(["mensaje" => "error al modificar el estudio"]);
         }
     }
 
