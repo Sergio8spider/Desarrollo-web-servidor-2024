@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Perro aleatorio</title>
     <?php
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
@@ -22,6 +22,7 @@
     $datos = json_decode($respuesta, true);
     $perro = $datos["message"];
     ?>
-    <img src=<?php echo $perro ?>></img>
+    <img width="400px" height="400px" src=<?php echo $perro ?>></img><br>
+    <a href="./perritos_aleatorios.php">Otro</a>
 </body>
 </html>
