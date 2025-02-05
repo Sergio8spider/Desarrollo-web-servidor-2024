@@ -12,22 +12,18 @@
 </head>
 <body>
     <?php
-        //ARREGLAR CONCANTENADO DE URL Y HACER PAGINA SIGUIENTE Y ANTERIOR
-        if(isset($_GET["type"])){
-            $tipo = $_GET["type"];
-        }else{
-            $tipo = "";
+        $apiUrl = "https://api.jikan.moe/v4/top/anime";
+        $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+        $tipo = isset($_GET["type"]) ? $_GET["type"] : "";
+        
+        
+        if (isset($_GET["page"]) && isset($_GET["type"])) { 
+            $apiUrl = "https://api.jikan.moe/v4/top/anime?page=$page&type=$tipo";
+        } else if (isset($_GET["page"])) {
+            $apiUrl = "https://api.jikan.moe/v4/top/anime?page=$page";
+        } else if (isset($_GET["type"])) {
+            $apiUrl = "https://api.jikan.moe/v4/top/anime?type=$tipo";
         }
-
-        $apiUrl = "https://api.jikan.moe/v4/top/anime?type=".$tipo;
-
-        if(isset($_GET["page"])){
-            $page = $_GET["page"];
-        }else{
-            $page = 1;
-        }
-
-        $apiUrl =  "https://api.jikan.moe/v4/top/anime?page=".$page;
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $apiUrl);
@@ -37,31 +33,23 @@
 
         $datos = json_decode($respuesta, true);
         $animes = $datos["data"];
-
+        $pagination = $datos["pagination"];
     ?>
+
+    <h2>Filtrar por:</h2>
+    <form action="" method="get">
+        <input class="form-check-input" type="radio" name="type" id="tv" value="tv">
+        <label class="form-check-label" for="tv">Serie</label><br>
+        <input class="form-check-input" type="radio" name="type" id="movie" value="movie">
+        <label class="form-check-label" for="movie">Película</label><br>
+        <input class="form-check-input" type="radio" name="type" id="" value="">
+        <label class="form-check-label" for="all">Todos</label><br><br>
+        <input class="btn btn-info" type="submit" value="Aplicar">
+    </form>
+    <br>
+
     <table class="table">
         <thead class="thead-dark">
-            <h3>Filtrar por tipo</h1>
-            <form action="" method="get">
-                <ul>
-                    <li>
-                    <label for="pelicula">Pelicula</label>
-                    <input type="radio" value="movie" id="pelicula" name="type">
-                    </li>
-                    <li>
-                    <label for="serie">Serie</label>
-                    <input type="radio" value="TV" id="serie" name="type">
-                    </li>
-                    <li>
-                    <label for="todos">Todos</label>
-                    <input type="radio" value="" id="todos" name="type">
-                    </li>
-                    <li>
-                    <input type="submit" value="Filtrar">
-                    </li>
-                </ul>
-            </form>
-            <h1>Tabla</h1>
             <tr>
                 <th scope="col">Posición</th>
                 <th scope="col">Título</th>
@@ -84,11 +72,15 @@
                             <img width="100px" src="<?php echo $anime["images"]["jpg"]["image_url"]?>">
                         </td>
                     </tr>
-            <?php } 
-            if ($_GET["current_page"] <= 1){ ?>
-                <a href="https://api.jikan.moe/v4/top/anime?page=" . <?php $_GET["current_page"] ?> >Siguiente página</a>
-            <?php } ?>
+                <?php } ?>
         </tbody>
     </table>
+    <?php
+        if ($pagination["current_page"] > 1) { ?>
+            <a href="?page=<?php echo $page-1 ?>&type=<?php echo $tipo ?>">Anterior</a>
+        <?php }
+        if ($pagination["has_next_page"]) { ?>
+            <a href="?page=<?php echo $page+1 ?>&type=<?php echo $tipo ?>">Siguiente</a>
+        <?php } ?>
 </body>
 </html>
