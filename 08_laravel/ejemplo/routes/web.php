@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CocheController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/coches', function () {
+    return view('hello');
+});
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/hello', function () {
+    return view('hello');
 });
